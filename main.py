@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import scrolledtext
 
-def placeHolder():
-    pass
+def placeHolder(e=''):
+    print("hello, world")
 
 # Create the main window
 window = tk.Tk()
@@ -10,33 +10,38 @@ window.title("Toxic Comment Classifier")
 window.geometry("800x600")
 
 # Create the text input box and submit button
-inputLabel = tk.Label(window, text="Enter Comment: ")
-inputEntry = tk.Entry(window)
-inputEntry.bind("<Return>", placeHolder) # Add function
-submitButton = tk.Button(window, text="Submit", command=placeHolder) # Add function
+input_label = tk.Label(window, text="Enter Comment: ")
+input_entry = tk.Entry(window)
+submit_button = tk.Button(window, text="Submit", command=placeHolder) # Add function
+input_label.place(x=20, y=15, width=120)
+input_entry.place(x=140, y=10, width=540, height=30)
+submit_button.place(x=690, y=10, width=90)
 
-outputText = scrolledtext.ScrolledText(window, width=90, height=20)
+input_entry.bind("<Return>", placeHolder) # Add function
 
-# Configure the input label, input entry, and submit button to span the width of the window
-inputLabel.pack(side="top", anchor="w", padx=10, pady=10)
-inputEntry.pack(side="top", fill="x", padx=10, pady=10)
-submitButton.pack(side="top", anchor="e", padx=10, pady=(0, 10))
+# Create and position output textbox
+output_text = scrolledtext.ScrolledText(window)
+output_text.place(x=20, y=50, width=760, height=380)
 
-# Output window
-outputText.pack(side="top", fill="both", padx=10, pady=10)
+# Status label to show what the program is doing
+status_label = tk.Label(window, text="Ready")
+status_label.place(x=20, y=435)
+
+# Accuracy label to display the accuracy of the model's predictions.
+accuracy_label = tk.Label(window, text="Accuracy: ")
+accuracy_label.place(x=20, y=460)
 
 # Create the buttons
-barChartButton = tk.Button(window, text="Show Bar Chart", command=placeHolder) # Add function
-pieChartButton = tk.Button(window, text="Show Pie Chart", command=placeHolder) # Add function
-heatmapButton = tk.Button(window, text="Show Heatmap", command=placeHolder) # Add function
+bar_chart_btn = tk.Button(window, text="Show Toxic Comment\nDistribution by Number", command=placeHolder) # Add function
+pie_chart_btn_one = tk.Button(window, text="Show % of Toxic and\nNon-Toxic Comments", command=placeHolder) # Add function
+pie_chart_btn_two = tk.Button(window, text="Show % of Toxic\nComments by Category", command=placeHolder) # Add function
+heatmap_btn = tk.Button(window, text="Show Heatmap of Precision\nRecall and F1 Score Metrics", command=placeHolder) # Add function
+accuracy_btn = tk.Button(window, text="Show Prediction Accuracy\nFor Test Dataset", command=placeHolder) # Add function
 
-# Position the buttons
-buttonFrame = tk.Frame(window)
-buttonFrame.pack(side="bottom", pady=10)
-barChartButton.pack(side="left", padx=(10, 5))
-pieChartButton.pack(side="left", padx=5)
-heatmapButton.pack(side="left", padx=(5, 10))
-
-
+bar_chart_btn.place(x=20, y=485, width=180)
+pie_chart_btn_one.place(x=210, y=485, width=180)
+pie_chart_btn_two.place(x=400, y=485, width=180)
+heatmap_btn.place(x=20, y=535, width=210)
+accuracy_btn.place(x=240, y=535, width=180)
 
 window.mainloop()
