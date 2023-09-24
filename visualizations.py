@@ -4,7 +4,7 @@ import data_handler
 import predictor
 
 # Shows a barchart of the toxic comment distribution by number.
-def create_bar_chart_number():
+def create_bar_chart():
     # Count the number of comments for each toxicity category.
     data = data_handler.get_csv_from_zip('data/toxic_subset_10901.zip', 'toxic_subset_10901.csv')
     data_columns = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
@@ -35,9 +35,9 @@ def create_bar_chart_number():
 
     plot.show()
 
-def create_bar_chart_categories():
+def create_pie_chart_categories():
     # Define the toxic categories and their corresponding percentages
-    data = data_handler.get_csv_from_zip('toxic_subset_10901.zip', 'toxic_subset_10901.csv')
+    data = data_handler.get_csv_from_zip('data/toxic_subset_10901.zip', 'toxic_subset_10901.csv')
     data_columns = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
     categories = ['Toxic', 'Severe Toxic', 'Obscene', 'Threat', 'Insult', 'Identity Hate']
     counts = [sum(data[column] == 1) for column in data_columns]
@@ -69,9 +69,9 @@ def create_bar_chart_categories():
     plot.show()
 
 # Shows a pie chart of the toxic comment distribution by percentages.
-def create_pie_chart():
+def create_pie_chart_percent():
     # Define the toxic categories and their corresponding percentages
-    data = data_handler.get_csv_from_zip('toxic_subset_10901.zip', 'toxic_subset_10901.csv')
+    data = data_handler.get_csv_from_zip('data/toxic_subset_10901.zip', 'toxic_subset_10901.csv')
     data_columns = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
     categories = ['Toxic', 'Non-toxic']
     counts = [sum(data[column] == 1) for column in data_columns]

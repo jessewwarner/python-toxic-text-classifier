@@ -2,9 +2,10 @@ import tkinter as tk
 from tkinter import scrolledtext
 
 import predictor
+import visualizations
 
 # Send the comment in the input text box to the model for prediction.
-def on_submit_button_click():
+def on_submit_button_click(e=None):
     input_text = input_entry.get()
     status_label.config(text="Determining if the comment is toxic...")
     window.update()
@@ -12,6 +13,20 @@ def on_submit_button_click():
     status_label.config(text="Ready.")
     output_text.insert(tk.END, f"{prediction}\n")
     output_text.see(tk.END)
+
+# Create the bar chart showing the number of comments with different toxic categories.
+def on_bar_chart_one_click():
+    status_label.config(text="Creating bar chart...")
+    window.update()
+    visualizations.create_bar_chart_number()
+    status_label.config(text="Ready")
+
+# Create the bar chart showing the percentage of comments in each toxic category.
+def on_bar_chart_two_click():
+    status_label.config(text="Creating bar chart...")
+    window.update()
+    visualizations.create_bar_chart_categories()
+    status_label.config(text="Ready")
 
 def placeHolder(e=''):
     print("hello, world")
@@ -24,12 +39,12 @@ window.geometry("800x600")
 # Create the text input box and submit button
 input_label = tk.Label(window, text="Enter Comment: ")
 input_entry = tk.Entry(window)
-submit_button = tk.Button(window, text="Submit", command=placeHolder) # Add function
+submit_button = tk.Button(window, text="Submit", command=on_submit_button_click) # Add function
 input_label.place(x=20, y=15, width=120)
 input_entry.place(x=140, y=10, width=540, height=30)
 submit_button.place(x=690, y=10, width=90)
 
-input_entry.bind("<Return>", placeHolder) # Add function
+input_entry.bind("<Return>", on_submit_button_click) # Add function
 
 # Create and position output textbox
 output_text = scrolledtext.ScrolledText(window)
