@@ -1,6 +1,18 @@
 import tkinter as tk
 from tkinter import scrolledtext
 
+import predictor
+
+# Send the comment in the input text box to the model for prediction.
+def on_submit_button_click():
+    input_text = input_entry.get()
+    status_label.config(text="Determining if the comment is toxic...")
+    window.update()
+    prediction = predictor.predict(input_text)
+    status_label.config(text="Ready.")
+    output_text.insert(tk.END, f"{prediction}\n")
+    output_text.see(tk.END)
+
 def placeHolder(e=''):
     print("hello, world")
 
