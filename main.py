@@ -12,12 +12,15 @@ window.geometry("800x600")
 # Create the text input box and submit button
 inputLabel = tk.Label(window, text="Enter Comment: ")
 inputEntry = tk.Entry(window)
+inputEntry.bind("<Return>", placeHolder) # Add function
+submitButton = tk.Button(window, text="Submit", command=placeHolder) # Add function
 
 outputText = scrolledtext.ScrolledText(window, width=90, height=20)
 
 # Configure the input label, input entry, and submit button to span the width of the window
 inputLabel.pack(side="top", anchor="w", padx=10, pady=10)
 inputEntry.pack(side="top", fill="x", padx=10, pady=10)
+submitButton.pack(side="top", anchor="e", padx=10, pady=(0, 10))
 
 # Output window
 outputText.pack(side="top", fill="both", padx=10, pady=10)
