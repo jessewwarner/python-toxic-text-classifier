@@ -4,6 +4,7 @@ import data_handler
 import model_trainer
 
 from io import StringIO
+from sklearn.metrics import classification_report, accuracy_score
 
 model = None
 vectorizer = None
@@ -79,3 +80,20 @@ def predict(comment):
         response += toxic_string
 
     return response
+
+# Generates and returns a classification report with accuracy metrics.
+def get_classification_report():
+    train_x, test_x, train_y, test_y = data_handler.get_train_test_sets()
+    test_x_vector = get_vectorizer().transform(test_x)
+    predict_y = get_model().predict(test_x_vector)
+    label = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
+    report = classification_report(test_y, predict_y, target_names=label, output_dict=True)
+    return report
+
+# Generate and return the accuracy of the prediction model (TP + TN)/len(dataset).
+def get_accuracy_metric():
+    train_x, test_x, train_y, test_y = data_handler.get_train_test_sets()
+    test_x_vector = get_vectorizer().transform(test_x)
+    predict_y = get_model().predict(test_x_vector)
+    accuracy = accuracy_score(test_y, predict_y)
+    return accuracy
