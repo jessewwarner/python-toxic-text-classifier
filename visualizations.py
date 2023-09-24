@@ -3,8 +3,10 @@ import numpy as np
 import data_handler
 import predictor
 
+plot.switch_backend('Qt5Agg')
+
 # Shows a barchart of the toxic comment distribution by number.
-def create_bar_chart():
+def create_bar_chart_number():
     # Count the number of comments for each toxicity category.
     data = data_handler.get_csv_from_zip('data/toxic_subset_10901.zip', 'toxic_subset_10901.csv')
     data_columns = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
@@ -35,7 +37,7 @@ def create_bar_chart():
 
     plot.show()
 
-def create_pie_chart_categories():
+def create_bar_chart_categories():
     # Define the toxic categories and their corresponding percentages
     data = data_handler.get_csv_from_zip('data/toxic_subset_10901.zip', 'toxic_subset_10901.csv')
     data_columns = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
@@ -68,8 +70,8 @@ def create_pie_chart_categories():
     plot.tight_layout()
     plot.show()
 
-# Shows a pie chart of the toxic comment distribution by percentages.
-def create_pie_chart_percent():
+# Shows a pie chart of the data distribution by percentages.
+def create_pie_chart():
     # Define the toxic categories and their corresponding percentages
     data = data_handler.get_csv_from_zip('data/toxic_subset_10901.zip', 'toxic_subset_10901.csv')
     data_columns = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
@@ -106,7 +108,7 @@ def create_pie_chart_percent():
     plot.show()
 
 # Create a heatmap of the classification report data produced by sklearn metrics
-def createHeatMap():
+def create_heatmap():
     report_data = predictor.get_classification_report()
     # Get precision, recall, and F1-score data for each category
     categories = list(report_data.keys())
