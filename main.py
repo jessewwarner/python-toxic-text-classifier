@@ -1,8 +1,7 @@
 import tkinter as tk
-from tkinter import scrolledtext
-
 import predictor
 import visualizations
+from tkinter import scrolledtext
 
 # Send the comment in the input text box to the model for prediction.
 def on_submit_button_click(e=None):
@@ -14,22 +13,41 @@ def on_submit_button_click(e=None):
     output_text.insert(tk.END, f"{prediction}\n")
     output_text.see(tk.END)
 
-# Create the bar chart showing the number of comments with different toxic categories.
-def on_bar_chart_one_click():
+# Create the bar chart showing the toxic comment distribution by number.
+def on_bar_chart_num_btn_click():
     status_label.config(text="Creating bar chart...")
     window.update()
     visualizations.create_bar_chart_number()
     status_label.config(text="Ready")
 
-# Create the bar chart showing the percentage of comments in each toxic category.
-def on_bar_chart_two_click():
+# Create the bar chart showing toxic comments by category
+def on_bar_chart_cat_btn_click():
     status_label.config(text="Creating bar chart...")
     window.update()
     visualizations.create_bar_chart_categories()
     status_label.config(text="Ready")
 
-def placeHolder(e=''):
-    print("hello, world")
+# Create the pie chart showing the percentage of toxic and non-toxic comments
+def on_pie_chart_btn_click():
+    status_label.config(text="Creating pie chart...")
+    window.update()
+    visualizations.create_pie_chart()
+    status_label.config(text="Ready")
+
+# Create the heatmap that displays the precision, recall, and f1 score metrics.
+def on_heatmap_btn_click():
+    status_label.config(text="Heatmap is being generated. Please be patient...")
+    window.update()
+    visualizations.create_heatmap()
+    status_label.config(text="Ready")
+
+# Generate and display the model's accuracy using the test dataset.
+def on_accuracy_btn_click():
+    status_label.config(text="Test dataset is being analyzed. Please be patient...")
+    window.update()
+    accuracy = predictor.get_accuracy_metric()
+    accuracy_label.config(text=f"Accuracy: {accuracy * 100:.2f}%")
+    status_label.config(text="Ready")
 
 # Create the main window
 window = tk.Tk()
@@ -58,16 +76,16 @@ status_label.place(x=20, y=435)
 accuracy_label = tk.Label(window, text="Accuracy: ")
 accuracy_label.place(x=20, y=460)
 
-# Create the buttons
-bar_chart_btn = tk.Button(window, text="Show Toxic Comment\nDistribution by Number", command=placeHolder) # Add function
-pie_chart_btn_one = tk.Button(window, text="Show % of Toxic and\nNon-Toxic Comments", command=placeHolder) # Add function
-pie_chart_btn_two = tk.Button(window, text="Show % of Toxic\nComments by Category", command=placeHolder) # Add function
-heatmap_btn = tk.Button(window, text="Show Heatmap of Precision\nRecall and F1 Score Metrics", command=placeHolder) # Add function
-accuracy_btn = tk.Button(window, text="Show Prediction Accuracy\nFor Test Dataset", command=placeHolder) # Add function
+# Create and position the visualization buttons
+bar_chart_num_btn = tk.Button(window, text="Show Toxic Comment\nDistribution by Number", command=on_bar_chart_num_btn_click) # Add function
+bar_chart_cat_btn = tk.Button(window, text="Show % of Toxic and\nNon-Toxic Comments", command=on_bar_chart_cat_btn_click) # Add function
+pie_chart_btn = tk.Button(window, text="Show % of Toxic\nComments by Category", command=on_pie_chart_btn_click) # Add function
+heatmap_btn = tk.Button(window, text="Show Heatmap of Precision\nRecall and F1 Score Metrics", command=on_heatmap_btn_click) # Add function
+accuracy_btn = tk.Button(window, text="Show Prediction Accuracy\nFor Test Dataset", command=on_accuracy_btn_click) # Add function
 
-bar_chart_btn.place(x=20, y=485, width=180)
-pie_chart_btn_one.place(x=210, y=485, width=180)
-pie_chart_btn_two.place(x=400, y=485, width=180)
+bar_chart_num_btn.place(x=20, y=485, width=180)
+bar_chart_cat_btn.place(x=210, y=485, width=180)
+pie_chart_btn.place(x=400, y=485, width=180)
 heatmap_btn.place(x=20, y=535, width=210)
 accuracy_btn.place(x=240, y=535, width=180)
 
