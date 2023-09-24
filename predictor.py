@@ -68,9 +68,7 @@ def predict(comment):
         toxic_string = " and ".join(toxic_labels)
     elif len(toxic_labels) > 2:
         try:
-            toxic_string = ", ".join(toxic_labels[:-1])
-            + ", and "
-            + toxic_labels[-1]
+            toxic_string = ", ".join(toxic_labels[:-1]) + ", and " + toxic_labels[-1]
         except IndexError:
             pass
 
